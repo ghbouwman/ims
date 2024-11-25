@@ -1,6 +1,6 @@
 
 -- all units in grid units
-function create_rod(x_pos, y_pos, radius, length, z_begin, restrict_to_right, restrict_to_upper)
+function create_diaphragm(x_pos, y_pos, begin_radius, end_radius, half_width, thickness, z_begin, restrict_to_right, restrict_to_upper, voltage)
 
         -- default values
         z_begin = z_begin or 0
@@ -9,13 +9,13 @@ function create_rod(x_pos, y_pos, radius, length, z_begin, restrict_to_right, re
         restrict_to_upper = restrict_to_upper or false
 
         -- loop ranges
-        local z_end = z_begin + length - 1
+        local z_end = z_begin + thickness - 1
 
-        local x_begin = x_pos - radius
-        local x_end = x_pos + radius
+        local x_begin = x_pos - half_width
+        local x_end = x_pos + half_width
 
-        local y_begin = y_pos - radius
-        local y_end = y_pos + radius
+        local y_begin = y_pos - half_width
+        local y_end = y_pos + half_width
 
         -- loop over all the gridpoints
         for z = z_begin, z_end do
@@ -33,9 +33,11 @@ function create_rod(x_pos, y_pos, radius, length, z_begin, restrict_to_right, re
                                         goto continue
                                 end
 
+                                local hole_radius = begin_radius + (end_radius - begin_radius) * (z - z_begin) / thickness
+
                                 -- set the point as an electrode
-                                if (x - x_pos)^2 + (y - y_pos)^2 <= radius^2 then
-                                        simion.pas:set_point_type(x, y, z, "electrode")
+                                if (x - x_pos)^2 + (y - y_pos)^2 > hole_radius^2 then
+                                        simion.pas:set_point_type(x, y, z, "electrode", voltage)
                                 end
 
                                 ::continue::
