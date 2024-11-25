@@ -32,7 +32,8 @@ function create_diaphragm(x_pos, y_pos, begin_radius, end_radius, half_width, th
                                 if restrict_to_upper and y < 0 then
                                         goto continue
                                 end
-
+                                
+                                -- linear interpolation between the beginning and end radius
                                 local hole_radius = begin_radius + (end_radius - begin_radius) * (z - z_begin) / thickness
 
                                 -- set the point as an electrode
