@@ -1,5 +1,3 @@
--- bit of a mess because implicitly using precompiled value is a bit of a bitch :(
-
 setups = setups or {}
 
 setups.ims = 
@@ -20,7 +18,7 @@ setups.ims =
                 z_begin         = 0     -- mm (from origin)
         
                 -- don't modify:
-                z_end           = 0 + 2   -- mm (from origin)
+                z_end           = z_begin + thickness   -- mm (from origin)
         },
         
         
@@ -37,12 +35,12 @@ setups.ims =
                 offset                  = 4             -- Volts
         
                 -- don't modify:
-                z_begin                 = 0 + 2 + 2      -- mm (from origin)
-                z_end                   = 0 + 2 + 2 + 250                              -- mm (from origin)
-                rod_radius              = 5.0 / 2                              -- mm
-                rod_centers_diameter    = 13.44 + 5.0             -- mm
-                rod_centers_radius      = (13.44 + 5.0) / 2                      -- mm
-                Vamplitude              = 350 / 2                                       -- V
+                z_begin                 = inlet.z_end + inlet_to_octupole_distance      -- mm (from origin)
+                z_end                   = z_begin + length                              -- mm (from origin)
+                rod_radius              = rod_diameter / 2                              -- mm
+                rod_centers_diameter    = inscribed_diameter + rod_diameter             -- mm
+                rod_centers_radius      = rod_centers_diameter / 2                      -- mm
+                Vamplitude              = Vpp / 2                                       -- V
         },
         
         outlet = 
@@ -53,15 +51,15 @@ setups.ims =
                 voltage         = -30   -- Volts
                 
                 -- don't modify:
-                z_begin         = 0 + 2 + 2 + 2 + 250 + 1  -- mm (from origin)
-                z_end           = 0 + 2 + 2 + 2 + 250 + 2                           -- mm (from origin) (this value is not used)
+                z_begin         = octupole.z_end + octupole_to_outlet_distance  -- mm (from origin)
+                z_end           = z_begin + thickness                           -- mm (from origin) (this value is not used)
         }
         
         -- auxiliary member
-        -- diaphragms = 
-        -- {
-        --         inlet, outlet
-        -- }
+        diaphragms = 
+        {
+                inlet, outlet
+        }
 }        
 
 return setups
