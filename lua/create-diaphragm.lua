@@ -1,10 +1,12 @@
 
 -- all units in grid units
-function create_diaphragm(x_pos, y_pos, begin_radius, end_radius, half_width, thickness, z_begin, restrict_to_right, restrict_to_upper, voltage)
+function create_diaphragm(z_begin, tickness, begin_radius, end_radius, half_width, voltage, restrict_to_right, restrict_to_upper, x_pos, y_pos)
 
-        -- default values
-        z_begin = z_begin or 0
+        -- default values - centres of the hole
+        x_pos = x_pos or 0
+        y_pos = y_pos or 0
 
+        -- default values - symmetries
         restrict_to_right = restrict_to_right or false
         restrict_to_upper = restrict_to_upper or false
 
