@@ -4,64 +4,57 @@ setups = setups or {}
 
 setups.ims = 
 {
-        -- distances between components
-        inlet_to_octupole_distance      = 2 -- mm
-        octupole_to_outlet_distance     = 1 -- mm
-
-        -- components
-        
         inlet = 
         {
-                thickness       = 2     -- mm 
-                begin_diameter  = 2     -- mm
-                end_diameter    = 6     -- mm
-                voltage         = 0     -- Volts
-
-                z_begin         = 0     -- mm (from origin)
+                geometry =
+                {
+                        thickness       = 2
+                        begin_diameter  = 2
+                        end_diameter    = 6
+                        z_begin         = 0     -- distance from origin
+                        z_end           = 0 + 2 -- distance from origin
         
-                -- don't modify:
-                z_end           = 0 + 2   -- mm (from origin)
+                }
+                voltage = 0     -- Volts
+
         },
         
         
         octupole =
         {
-                -- geometry:
-                length                  = 250           -- mm
-                rod_diameter            = 5.0           -- mm
-                inscribed_diameter      = 13.44         -- mm
+                geometry = -- all values in mm
+                {
+                        length                  = 250           
+                        rod_diameter            = 5.0           
+                        inscribed_diameter      = 13.44         
+                        z_begin                 = 0 + 2 + 2             -- distance from origin
+                        z_end                   = 0 + 2 + 2 + 250       -- distance from origin
+                        rod_radius              = 5.0 / 2          
+                        rod_centers_diameter    = 13.44 + 5.0      
+                        rod_centers_radius      = (13.44 + 5.0) / 2
+                }
         
-                -- electronics:
-                Vpp                     = 350           -- Volts
-                freq                    = 700           -- kHz
-                offset                  = 4             -- Volts
-        
-                -- don't modify:
-                z_begin                 = 0 + 2 + 2      -- mm (from origin)
-                z_end                   = 0 + 2 + 2 + 250                              -- mm (from origin)
-                rod_radius              = 5.0 / 2                              -- mm
-                rod_centers_diameter    = 13.44 + 5.0             -- mm
-                rod_centers_radius      = (13.44 + 5.0) / 2                      -- mm
-                Vamplitude              = 350 / 2                                       -- V
+                -- electronics
+                Vpp             = 350           -- V
+                freq            = 700           -- kHz
+                offset          = 4             -- V
+                Vamplitude      = 350 / 2       -- V
         },
         
         outlet = 
         {
-                thickness       = 2     -- mm 
-                begin_diameter  = 0.6   -- mm
-                end_diameter    = 0.6   -- mm (probably not the actual value, but that doesn't matter)
-                voltage         = -30   -- Volts
-                
-                -- don't modify:
-                z_begin         = 0 + 2 + 2 + 2 + 250 + 1  -- mm (from origin)
-                z_end           = 0 + 2 + 2 + 2 + 250 + 2                           -- mm (from origin) (this value is not used)
+                geometry =
+                {
+                        thickness       = 2  
+                        begin_diameter  = 0.6
+                        end_diameter    = 0.6 -- probably not the actual value, but that doesn't matter
+                        z_begin         = 0 + 2 + 2 + 2 + 250 + 1       -- distance from origin
+                        z_end           = 0 + 2 + 2 + 2 + 250 + 2       -- distance from origin 
+                }
+
+                -- electronics
+                voltage = -30   -- V
         }
-        
-        -- auxiliary member
-        -- diaphragms = 
-        -- {
-        --         inlet, outlet
-        -- }
 }        
 
 return setups
