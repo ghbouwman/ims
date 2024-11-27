@@ -7,14 +7,15 @@ setups.ims =
         octupole_to_outlet_distance     = 1 -- mm
 
         -- components
-
+        
         inlet = 
         {
-                z_begin         = 0     -- mm (from origin)
                 thickness       = 2     -- mm 
                 begin_diameter  = 2     -- mm
                 end_diameter    = 6     -- mm
                 voltage         = 0     -- Volts
+
+                z_begin         = 0     -- mm (from origin)
         
                 -- don't modify:
                 z_end           = z_begin + thickness   -- mm (from origin)
