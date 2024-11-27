@@ -1,12 +1,12 @@
+setups = setups or {}
 
-
-
-
-ims_setup = 
+setups.ims = 
 {
         -- distances between components
         inlet_to_octupole_distance      = 2 -- mm
         octupole_to_outlet_distance     = 1 -- mm
+
+        -- components
 
         inlet = 
         {
@@ -54,9 +54,11 @@ ims_setup =
                 z_end           = z_begin + thickness                           -- mm (from origin) (this value is not used)
         }
         
+        -- auxiliary member
         diaphragms = 
         {
                 inlet, outlet
         }
 }        
-        
+
+return setups
