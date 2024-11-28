@@ -23,7 +23,7 @@ function convert.to_gu(component)
         for key, value in pairs(copy.geometry) do
                 copy.geometry[key] = value / scale
         end
-
+        
         return copy
 end
 

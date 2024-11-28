@@ -22,8 +22,8 @@ end
 
 
 
-
 local total_time = 1    -- total simulation time in seconds
+local time_step = 0.1
 
 local f      = setup.octupole.freq        
 local A      = setup.octupole.Vamplitude 
@@ -39,7 +39,7 @@ while time <= total_time do
 
     local voltage = calculate_voltage(time)
 
-    simion.pas:set_electrode_voltage(2, voltage)
+    -- simion.pas:set_electrode_voltage(2, voltage)
 
     -- debug
     print(string.format("Time: %.2f s, Voltage: %.2f V", time, voltage))
