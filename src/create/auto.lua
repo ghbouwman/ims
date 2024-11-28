@@ -8,7 +8,7 @@ function create.auto(component)
         
         local kind = component.kind
 
-        if kind == "octupole" then
+        if kind == "diaphragm" then
                 create.octupole() 
                 goto ::end::
         end
@@ -17,9 +17,9 @@ function create.auto(component)
                 create.octupole() 
                 goto ::end::
         end
-
 
         print("error: kind of component could not matched' kind: ", kind) 
+        return nil
 
         ::end::
 
