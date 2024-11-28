@@ -1,8 +1,8 @@
 
-
+convert = convert or {}
 
 local settings = require("settings")
-local scale = setting.scale
+local scale = settings.scale
 
 function deep_copy(obj)
         if type(obj) ~= "table" then
@@ -16,7 +16,7 @@ function deep_copy(obj)
         return copy
 end
 
-function to_gu(component)
+function convert.to_gu(component)
 
         local copy = deep_copy(component)
 
@@ -28,4 +28,4 @@ function to_gu(component)
 end
 
 
-
+return convert
