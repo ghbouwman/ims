@@ -57,11 +57,11 @@ func(pos, geom, elec)
         # modify geom and 
 
         # conditionally include the static voltage
-        rv.ids = build()
+        rv.ids = build(ranges, pred)
 
         return rv
 
-
+how do we delegate to sub-components?
 
 
 ims.octupole     = create.octupole(position, geometry, electrical.sinusoidal(350/2, 700000, 0))

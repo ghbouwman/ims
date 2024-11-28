@@ -1,45 +1,26 @@
 create = create or {}
 
 -- all units in grid units
-function create.rod(x_pos, y_pos, z_pos, radius, length)
-
-        restrict_to_right = restrict_to_right or false
-        restrict_to_upper = restrict_to_upper or false
+function create.rod(pos, voltage, length, radius)
 
         -- loop ranges
-        local z_end = z_begin + length - 1
+        local ranges = {}
 
-        local x_begin = x_pos - radius
-        local x_end = x_pos + radius
+        local ranges.x_min = pos.x - radius
+        local ranges.x_max = pos.x + radius
 
-        local y_begin = y_pos - radius
-        local y_end = y_pos + radius
+        local ranges.y_min = pos.y - radius
+        local ranges.y_max = pos.y + radius
 
-        -- loop over all the gridpoints
-        for z = z_begin, z_end do
+        local ranges.z_min = pos.z
+        local ranges.z_max = pos.z + length - 1
 
-                for x = x_begin, x_end do
-
-                        for y = y_begin, y_end do
-                                
-                                -- check bounds when using symmetry
-                                if settings.symmetry.x and x < 0 then
-                                        goto continue
-                                end
-
-                                if settings.symmetry.y and y < 0 then
-                                        goto continue
-                                end
-
-                                -- set the point as an electrode
-                                if (x - x_pos)^2 + (y - y_pos)^2 <= radius^2 then
-                                        create.electrode(x, y, z) -- no voltage since it will change anyway
-                                end
-
-                                ::continue::
-                        end
-                end
+        function predicate(x, y, z)
+                return (x - x_pos)^2 + (y - y_pos)^2 <= radius^2
         end
+
+        ids = create.from_predicate(ranges, predicate, voltage)
+        return ids
 end
 
 return create
