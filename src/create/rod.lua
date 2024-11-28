@@ -1,10 +1,7 @@
 create = create or {}
 
 -- all units in grid units
-function create.rod(x_pos, y_pos, radius, length, z_begin, restrict_to_right, restrict_to_upper)
-
-        -- default values
-        z_begin = z_begin or 0
+function create.rod(x_pos, y_pos, z_pos, radius, length)
 
         restrict_to_right = restrict_to_right or false
         restrict_to_upper = restrict_to_upper or false
@@ -26,11 +23,11 @@ function create.rod(x_pos, y_pos, radius, length, z_begin, restrict_to_right, re
                         for y = y_begin, y_end do
                                 
                                 -- check bounds when using symmetry
-                                if restrict_to_right and x < 0 then
+                                if settings.symmetry.x and x < 0 then
                                         goto continue
                                 end
 
-                                if restrict_to_upper and y < 0 then
+                                if settings.symmetry.y and y < 0 then
                                         goto continue
                                 end
 

@@ -48,7 +48,7 @@ setups.ims =
                         Vpp             = 350,          
                         freq            = 700_000,      
                         offset          = 4,            
-                        Vamplitude      = 350 / 2,      
+                        amplitude       = 350 / 2,      
                         phase           = 0             
                 }
         

@@ -1,17 +1,10 @@
 create = create or {}
 
 -- all units in grid units
-function create.diaphragm(z_begin, tickness, begin_radius, end_radius, half_width, voltage, restrict_to_right, restrict_to_upper, x_pos, y_pos)
-
-        -- default values - centres of the hole
-        x_pos = x_pos or 0
-        y_pos = y_pos or 0
-
-        -- default values - symmetries
-        restrict_to_right = restrict_to_right or false
-        restrict_to_upper = restrict_to_upper or false
+function create.diaphragm(x_pos, y_pos, z_pos, voltage, thickness, begin_radius, end_radius, half_width)
 
         -- loop ranges
+        local z_begin = z_pos
         local z_end = z_begin + thickness - 1
 
         local x_begin = x_pos - half_width
@@ -28,11 +21,11 @@ function create.diaphragm(z_begin, tickness, begin_radius, end_radius, half_widt
                         for y = y_begin, y_end do
                                 
                                 -- check bounds when using symmetry
-                                if restrict_to_right and x < 0 then
+                                if settings.symmetry.x and x < 0 then
                                         goto continue
                                 end
 
-                                if restrict_to_upper and y < 0 then
+                                if settings.symmetry.y and y < 0 then
                                         goto continue
                                 end
                                 

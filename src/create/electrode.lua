@@ -7,7 +7,8 @@ local settings = require("settings")
 
 if settings.simion_is_available then
         function real_electrode_creation(x, y, z, voltage)
-                simion.pas:set_point_type(x, y, z, "electrode", voltage)
+                id = simion.pas:set_point_type(x, y, z, "electrode", voltage)
+                return id
         end
 
         create.electrode = real_electrode_creation
