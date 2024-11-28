@@ -6,6 +6,7 @@ setups.ims =
 {
         inlet = 
         {
+                kind = "diaphragm",
                 geometry =
                 {
                         thickness       = 2,
@@ -22,6 +23,7 @@ setups.ims =
         
         octupole =
         {
+                kind = "octupole",
                 geometry =
                 {
                         length                  = 250,          
@@ -43,6 +45,7 @@ setups.ims =
         
         outlet = 
         {
+                kind = "diaphragm",
                 geometry =
                 {
                         thickness       = 2,
