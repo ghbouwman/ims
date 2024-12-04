@@ -48,8 +48,13 @@ constructs geometry
 pseudocode:
 
 
+statc: voltage
+dynamic: function
 
-func(pos, geom, elec)
+func(pos, elec, geom)
+
+        func(pos, geom, elec)
+
         rv = {pos, geom, elec}
         rv.ranges = func(...)
         rv.pred = func(...)
@@ -71,7 +76,42 @@ ims.inlet        = create.inlet(0, 0, 0)
 
 
 
+object may be:
+made of other objects
+an electrode
+according to a predicate
 
+define subobjects
+construct subobjects relative to current position
+adjust subobjects
+
+
+function octupole:new()
+        rod()
+        rod()
+        rod()
+end
+
+
+
+subobjects datamember
+
+
+
+
+
+obj = blah:new(pos, elec, geom)
+obj:init()
+obj:update(t)
+
+
+
+
+function octupole:new(pos, elec, geom)
+        rod:new(pos + {},  elec, geom.length, geom.rod_diamter)
+        rod:new(pos + {}, -elec, geom.length, geom.rod_diamter)
+        rod:new(pos + {},  elec, geom.length, geom.rod_diamter)
+end
 
 
 

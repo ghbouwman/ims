@@ -2,7 +2,12 @@
 
 create = create or {}
 
-function create.from_predicate(ranges, predicate, voltage)
+function create.from_predicate(ranges, predicate, electrical)
+
+        local voltage = nil
+        if electrcal.kind = "static" then
+                voltage = electrical.voltage 
+        end
         
         local ids = {}
 

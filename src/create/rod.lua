@@ -8,10 +8,8 @@ function create.rod(pos, voltage, length, radius)
 
         local ranges.x_min = pos.x - radius
         local ranges.x_max = pos.x + radius
-
         local ranges.y_min = pos.y - radius
         local ranges.y_max = pos.y + radius
-
         local ranges.z_min = pos.z
         local ranges.z_max = pos.z + length - 1
 

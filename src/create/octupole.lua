@@ -10,16 +10,20 @@ function create.octupole(pos, length, rod_centers_radius, rod_radius)
         
         local diag_pos = math.round(math.sqrt(0.5) * rod_centers_radius)
 
+        local rods = {}
+
         -- 0 degrees rod
-        rod1 = create_rod({pos.x + rod_centers_radius, pos.y,                      pos.z}, voltage, length, rod_radius)
+        rods.right = create_rod({pos.x + rod_centers_radius, pos.y,                      pos.z}, voltage, length, rod_radius)
 
         -- 45 degrees rod
-        rod2 = create_rod({pos.x + diag_pos,           pos.y + diag_pos,           pos.z}, voltage, length, rod_radius)
+        rods.diag  = create_rod({pos.x + diag_pos,           pos.y + diag_pos,           pos.z}, voltage, length, rod_radius)
 
         -- 90 degrees rod
-        rod3 = create_rod({pos.x,                      pos.y + rod_centers_radius, pos.z}, voltage, length, rod_radius)
+        rods.top   = create_rod({pos.x,                      pos.y + rod_centers_radius, pos.z}, voltage, length, rod_radius)
 
         -- other rods we get by symmetry
+
+        return rods
 end
 
 return create

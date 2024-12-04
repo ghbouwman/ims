@@ -15,6 +15,7 @@ if settings.simion_is_available then
 else
         function mock_electrode_creation(x, y, z, voltage)
                 print(string.format("mock construction: x=%d, y=%d, z=%d, V=%.2f", x, y, z, voltage))
+                return nil
         end
 
         create.electrode = mock_electrode_creation
