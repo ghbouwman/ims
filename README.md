@@ -101,8 +101,15 @@ subobjects datamember
 
 
 obj = blah:new(pos, elec, geom)
+add more to geom
+pos-gu
+geom-gu
+ids = {}
 obj:init()
+        for-loop with subobjects
+        from_predicate()
 obj:update(t)
+        for-loop with subobjects
 
 
 
@@ -112,6 +119,34 @@ function octupole:new(pos, elec, geom)
         rod:new(pos + {}, -elec, geom.length, geom.rod_diamter)
         rod:new(pos + {},  elec, geom.length, geom.rod_diamter)
 end
+
+
+---------------------------------------------
+elec objs: overloads
+
+
+every obj:
+
+takes: pos, geom, elec
+
+pos_gu
+geom_gm
+
+init function
+update function that takes the current time
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
