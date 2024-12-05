@@ -2,9 +2,13 @@
 Octupole = {}
 Octupole.__index = Octupole
 
+function math.round(value)
+        return math.floor(value + 0.5)
+end
+
 function convert(set)
        
-        rv = {}
+        local rv = {}
 
         for key, value in pairs(set) do
                 rv[key] = value / scale        
@@ -38,23 +42,23 @@ end
 
 function get_ranges(pos, geom)
         
-        local feature_size = 3 * find_max(geom)
+        local feature_size = 3.5 * find_max(geom)
 
         local rv = 
         {
                 x_min = pos.x - feature_size
                 x_max = pos.x + feature_size
-                y_min = pos.x - feature_size
-                y_max = pos.x + feature_size
-                z_min = pos.x - feature_size
-                z_max = pos.x + feature_size
+                y_min = pos.y - feature_size
+                y_max = pos.y + feature_size
+                z_min = pos.z - feature_size
+                z_max = pos.z + feature_size
         }
 
         return rv
 end
 
 -- factory function
-function base.factory(pos, elec, geom)
+function base(pos, elec, geom)
 
         local instance = {}
 
@@ -76,7 +80,7 @@ end
 function Octupole:init()
         
         for _, obj in ipairs(self.subobjs) do
-                obj.update(t)
+                obj.init()
         end
 
         self.ids = from_predicate(self.predicate, self.ranges_gu)
@@ -98,14 +102,14 @@ end
 
 function Octupole:new(pos, elec, geom)
 
-        local instance = base.factory(pos, elec, geom)
+        local instance = base(pos, elec, geom)
 
         local diag_pos = math.round(math.sqrt(0.5) * self.rod_centers_radius)
         
         -- Rod is also a class
-        subobjs.right   = Rod:new(self.pos + {self.rod_center_radius, 0, 0}, self.elec, {self.geom.length, self.geom.rod_diam})
-        subobjs.diag    = Rod:new(self.pos + {diag_pos, diag_pos, 0},       -self.elec, {self.geom.length, self.geom.rod_diam})
-        subobjs.top     = Rod:new(self.pos + {0, self.rod_center_radius, 0}, self.elec, {self.geom.length, self.geom.rod_diam})
+        self.subobjs.right   = Rod:new(self.pos + {self.rod_center_radius, 0, 0}, self.elec, {self.geom.length, self.geom.rod_diam})
+        self.subobjs.diag    = Rod:new(self.pos + {diag_pos, diag_pos, 0},       -self.elec, {self.geom.length, self.geom.rod_diam})
+        self.subobjs.top     = Rod:new(self.pos + {0, self.rod_center_radius, 0}, self.elec, {self.geom.length, self.geom.rod_diam})
 
         return instance
 end
