@@ -38,7 +38,9 @@ function BaseClass:init()
         end
         if self.predicate then
                 self.pa = simion.pas:open()
-                self.ids = utils.from_predicate(self.predicate, self.ranges_gu, self.pa)
+                self.pa.size(300, 25, 25)
+                utils.from_predicate(self.predicate, self.ranges_gu, self.pa)
+                -- ids = pa:points()
         end
 end
 
