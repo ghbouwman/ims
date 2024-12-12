@@ -13,7 +13,7 @@ if settings.simion_is_available then
                 setup:update(t)
         end
 else
-        local t_max = 1e-6
+        local t_max = 1e-9
         local dt = 1e-9
         
         t = 0
