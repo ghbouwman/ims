@@ -57,42 +57,34 @@ end
 
 -- conditionally define a function
 if settings.simion_is_available then
-        local function real_init(x, y, z, voltage)
-                id = simion.pas:set_point_type(x, y, z, "electrode", voltage)
-                return id
+        
+        local function real_init(pa, x, y, z, voltage)
+                pa:point(x, y, z, voltage, true)
         end
 
         utils.init_electrode = real_init
 else
-        index = 0 -- mock index
-
-        local function mock_init(x, y, z, voltage)
-                print("mock construction: ", x, y, z, voltage)
-                index = index + 1
-                return index
+        local function mock_init(pa, x, y, z, voltage)
+                print("mock construction: ", pa, x, y, z, voltage)
         end
 
         utils.init_electrode = mock_init
 end
 
-function utils.from_predicate(predicate, ranges) -- , electrical)
+function utils.from_predicate(predicate, ranges, pa) -- , electrical)
 
         local voltage = nil
-        local ids = {}
 
         for x = ranges.x_min, ranges.x_max do
                 for y = ranges.y_min, ranges.y_max do
                         for z = ranges.z_min, ranges.z_max do
                                 if predicate(x, y, z) then
-                                        id = utils.init_electrode(x, y, z, voltage)
-                                        ids[#ids + 1] = id
+                                        utils.init_electrode(pa, x, y, z, voltage)
                                 end
 
                         end
                 end
         end
-
-        return ids
 end
 
 -- conditionally define a function

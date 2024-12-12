@@ -22,6 +22,7 @@ function BaseClass:new(pos, elec, geom)
         instance.pos_gu = utils.convert(pos)
         instance.geom_gu = utils.convert(geom)
         instance.ranges_gu = utils.convert(instance.ranges)
+        instance.pa = nil
 
         return instance
 end
@@ -36,7 +37,8 @@ function BaseClass:init()
                 end
         end
         if self.predicate then
-                self.ids = utils.from_predicate(self.predicate, self.ranges_gu)
+                self.pa = simion.pas:open()
+                self.ids = utils.from_predicate(self.predicate, self.ranges_gu, self.pa)
         end
 end
 
